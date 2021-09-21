@@ -8,8 +8,17 @@ public class Caesar {
         String encrypted = "";
         for (int i = 0; i < message.length(); i++) {
             char new_char = message.charAt(i);
-            new_char = (char)(new_char + 3);
-            encrypted = encrypted + new_char;
+            if ((new_char < 65 || new_char > 122) || (new_char >= 91 && new_char < 97)){
+                encrypted = encrypted + new_char;
+            }
+            else if ((new_char == 'x') || (new_char == 'y') || (new_char == 'z') || (new_char == 'X') || (new_char == 'Y') || (new_char == 'Z')){
+                new_char = (char) (new_char - 23);
+                encrypted = encrypted + new_char;
+            }
+            else {
+                new_char = (char) (new_char + 3);
+                encrypted = encrypted + new_char;
+            }
         }
 
         return encrypted;
@@ -22,8 +31,17 @@ public class Caesar {
         String decyrpted = "";
         for (int i = 0; i < message.length(); i++) {
             char new_char = message.charAt(i);
-            new_char = (char)(new_char - 3);
-            decyrpted = decyrpted + new_char;
+            if ((new_char < 65 || new_char > 122) || (new_char >= 91 && new_char < 97)){
+                decyrpted = decyrpted + new_char;
+            }
+            else if ((new_char == 'a') || (new_char == 'b') || (new_char == 'c') || (new_char == 'A') || (new_char == 'B') || (new_char == 'C')){
+                new_char = (char) (new_char + 23);
+                decyrpted = decyrpted + new_char;
+            }
+            else {
+                new_char = (char) (new_char - 3);
+                decyrpted = decyrpted + new_char;
+            }
         }
 
         return decyrpted;
@@ -83,10 +101,10 @@ public class Caesar {
             else {
                 for (int j = 1; j <= key; j++) {
                     new_char--;
-                    if (new_char == (char) ((int) 'z' + 1)) {
-                        new_char = 'a';
-                    } else if (new_char == (char) ((int) 'Z' + 1)) {
-                        new_char = 'A';
+                    if (new_char == 64) {
+                        new_char = 'Z';
+                    } else if (new_char == 96) {
+                        new_char = 'z';
                     }
 
                 }
@@ -101,6 +119,7 @@ public class Caesar {
     // The main method is already provided for you
     // You do not need to edit this code until Part 2
     public static void main(String[] args) {
+
 
         System.out.println(encryptCaesarKey("Hello, World!", 5));
 
